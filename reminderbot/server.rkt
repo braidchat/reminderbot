@@ -1,16 +1,17 @@
 #lang racket/base
 
-(require racket/contract/base
-         web-server/servlet
-         web-server/servlet-env)
+(require web-server/servlet
+         web-server/servlet-env
+
+         "util.rkt"
+         "transit.rkt")
 (provide serve)
 
 (define (start request)
-  (println request)
-  (response/output
-   (λ (op)
-     (write-bytes #"i am reminderbot" op)
-     (void))))
+  ;; TODO: validate signature
+  (let ([message (-> request request-post-data/raw unpack)])
+    (println message))
+  (response/output void #:message #"OK"))
 
 (define (serve port)
   (serve/servlet start

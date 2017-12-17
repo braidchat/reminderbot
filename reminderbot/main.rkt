@@ -34,5 +34,6 @@
 
 (module+ main
   ;; Main entry point, executed when run with the `racket` executable or DrRacket.
+  ;; TODO: get port from config file
   (serve 8899)
   )
