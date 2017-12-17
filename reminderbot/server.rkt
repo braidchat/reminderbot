@@ -8,7 +8,7 @@
 (define (start request)
   (println request)
   (response/output
-   (lambda (op)
+   (λ (op)
      (write-bytes #"i am reminderbot" op)
      (void))))
 
