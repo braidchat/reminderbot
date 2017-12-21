@@ -3,6 +3,7 @@
 (provide unpack uuid)
 (require racket/port
          racket/string
+         racket/vector
          racket/match
          (prefix-in msgpack: msgpack)
          "util.rkt")
@@ -18,6 +19,8 @@
          make-immutable-hash)]
     [(regexp #rx"^~:(.*)$" (list _ kw)) (string->keyword kw)]
     [(vector "~#u" (vector hi64 lo64)) (uuid hi64 lo64)]
+    [(vector "~#m" ts) (seconds->date (* (/ 1000) ts))]
+    [(vector "~#list" rest) (vector-map ->transit rest)]
     [(vector thing ...) (map ->transit thing)]
     [_ form]))
 
