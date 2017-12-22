@@ -1,11 +1,14 @@
 #lang racket/base
 
 (provide unpack uuid)
+
 (require racket/port
          racket/string
          racket/vector
          racket/match
+
          (prefix-in msgpack: msgpack)
+
          "util.rkt")
 
 ;; TODO: make this pretty-print like other UUIDs

@@ -1,11 +1,12 @@
 #lang racket/base
 
+(provide serve)
+
 (require web-server/servlet
          web-server/servlet-env
 
          "util.rkt"
          "transit.rkt")
-(provide serve)
 
 (define (start request)
   ;; TODO: validate signature
