@@ -22,4 +22,4 @@
   (syntax-rules ()
     [(_ x (f a ...)) (if x (f a ... x) x)]
     [(_ x f) (if x (f x) x)]
-    [(_ x f g ...) (some->> (some->> x f) g ...)]))
+    [(_ x f g ...) (if x (some->> (some->> x f) g ...) x)]))
