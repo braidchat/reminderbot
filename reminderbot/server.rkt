@@ -4,7 +4,7 @@
 
 (require web-server/servlet
          web-server/servlet-env
-         file/sha1
+         (only-in file/sha1 bytes->hex-string)
          grommet/crypto/hmac
 
          "util.rkt"
