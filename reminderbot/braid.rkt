@@ -13,8 +13,6 @@
 
 (define base-url (string->url braid-url))
 
-(define (tee x) (println x) x)
-
 (define (send-message msg)
   (let* ([url (combine-url/relative base-url "/bots/message")]
          [auth-header (-> (list bot-id ":" bot-token)
