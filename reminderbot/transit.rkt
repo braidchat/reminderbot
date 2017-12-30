@@ -10,10 +10,8 @@
 
          (prefix-in msgpack: msgpack)
 
+         "uuid.rkt"
          "util.rkt")
-
-;; TODO: make this pretty-print like other UUIDs
-(struct uuid (hi64 lo64) #:prefab)
 
 (define (transit->form transit)
   (match transit
