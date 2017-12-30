@@ -9,10 +9,12 @@
 
          "util.rkt"
          "transit.rkt"
-         "config.rkt")
+         "config.rkt"
+         "braid.rkt")
 
 (define (handle-message msg)
-  (println (hash-ref msg '#:content)))
+  (println (hash-ref msg '#:content))
+  (reply-to msg "Hello there! I'm the reminder bot"))
 
 (define (start request)
   (let ([body (-> request request-post-data/raw)]

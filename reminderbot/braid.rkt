@@ -1,6 +1,6 @@
 #lang racket/base
 
-(provide send-message)
+(provide send-message reply-to)
 
 (require racket/port
          racket/string
@@ -9,6 +9,7 @@
 
          "transit.rkt"
          "util.rkt"
+         "uuid.rkt"
          "config.rkt")
 
 (define base-url (string->url braid-url))
@@ -27,3 +28,9 @@
                       (list (basic-auth-header bot-id bot-token)
                             "Content-Type: application/transit+msgpack"))
       port->string))
+
+(define (reply-to msg content)
+  (-> msg
+      (hash-set '#:content content)
+      (hash-set '#:id (make-uuid))
+      send-message))
