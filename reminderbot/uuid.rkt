@@ -39,8 +39,11 @@
 (define (make-uuid)
   (let ([hi (-> (rand-64)
                 ;; Set version in 4 sig bits of time_hi_and_version
-                (bitwise-and (bitwise-not #b1111))
-                (bitwise-ior #b0100))]
+                (bitwise-and (-> #b1111
+                                 (arithmetic-shift 12)
+                                 (bitwise-not)))
+                (bitwise-ior (-> #b0100
+                                 (arithmetic-shift 12))))]
         [lo (-> (rand-64)
                 ;; set 2 sig bits of clock_seq_hi_res to 0 & 1
                 (bitwise-and (-> 1
