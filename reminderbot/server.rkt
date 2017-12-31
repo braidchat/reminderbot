@@ -18,9 +18,10 @@
 
 (define (start request)
   (let ([body (-> request request-post-data/raw)]
-        [signature (some->> request request-headers (assoc 'x-braid-signature) cdr)])
-    (if (and signature body
-             (string=? signature (bytes->hex-string (hmac-sha256 bot-token body))))
+        [sig (some->> request request-headers (assoc 'x-braid-signature) cdr)])
+    (if (and sig body
+             (string=? sig
+                       (bytes->hex-string (hmac-sha256 bot-token body))))
       (begin
         (handle-message (unpack body))
         (response/output void #:message #"OK"))
