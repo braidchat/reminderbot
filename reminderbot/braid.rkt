@@ -18,7 +18,7 @@
   (-> (list user ":" pass)
       (string-join "")
       string->bytes/utf-8
-      (base64-encode #"")
+      (base64-encode #"") ; don't insert crlf every 75 chars
       bytes->string/utf-8
       (->> (string-append "Authorization: Basic "))))
 
