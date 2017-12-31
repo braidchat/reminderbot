@@ -10,11 +10,12 @@
          "util.rkt"
          "transit.rkt"
          "config.rkt"
-         "braid.rkt")
+         "braid.rkt"
+         "behaviour.rkt")
 
 (define (handle-message msg)
-  (println (hash-ref msg '#:content))
-  (reply-to msg "Hello there! I'm the reminder bot"))
+  ;; TODO: run this in a thread or future?
+  (act-on-message msg))
 
 (define (start request)
   (let ([body (-> request request-post-data/raw)]
