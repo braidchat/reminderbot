@@ -41,7 +41,8 @@
     [(? keyword? kw) (string-append "~:" (keyword->string kw))]
     [(? date? d) (vector "~#m" (* 1000 (date*->seconds d)))]
     [(? uuid? u) (vector "~#u" (vector (uuid-hi64 u) (uuid-lo64 u)))]
-    [(list thing ...) (vector "~#list" (list->vector thing))]
+    [(list thing ...) (vector "~#list"
+                             (list->vector (map form->transit thing)))]
     [_ form]))
 
 (define (pack thing)
