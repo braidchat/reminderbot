@@ -7,6 +7,7 @@
          tasks
 
          "util.rkt"
+         "uuid.rkt"
          "braid.rkt")
 
 (define reminder-re #rx"^/reminderbot (.*) in ([0-9]+) minutes$")
@@ -25,7 +26,17 @@
           (thread
            (λ ()
              (with-task-server
-              (delayed-task secs (reply-to msg txt))
+              (delayed-task
+               secs
+               (-> (make-immutable-hash)
+                   (hash-set '#:id (make-uuid))
+                   (hash-set '#:thread-id (make-uuid))
+                   (hash-set '#:group-id (hash-ref msg '#:group-id))
+                   (hash-set '#:content txt)
+                   (hash-set '#:mentioned-user-ids
+                             (list (hash-ref msg '#:user-id)))
+                   (hash-set '#:mentioned-tag-ids '())
+                   send-message))
               (run-tasks))))
           (-> (list "Okay, I'll remind you in" (number->string secs) "seconds")
               string-join))
