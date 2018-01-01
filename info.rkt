@@ -4,7 +4,8 @@
                "base"
                "rackunit-lib"
                "msgpack"
-               "grommet"))
+               "grommet"
+               "tasks"))
 (define build-deps '("web-server-lib"
                      "scribble-lib" "racket-doc"))
 (define scribblings '(("scribblings/reminderbot.scrbl" ())))
