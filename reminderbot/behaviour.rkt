@@ -6,9 +6,11 @@
          racket/string
          tasks
 
-         "util.rkt"
-         "uuid.rkt"
-         "braid.rkt")
+         braidbot/util
+         braidbot/uuid
+         braidbot/braid
+
+         "config.rkt")
 
 (define reminder-re #rx"^/reminderbot (.*) in ([0-9]+) minutes$")
 
@@ -36,7 +38,8 @@
                    (hash-set '#:mentioned-user-ids
                              (list (hash-ref msg '#:user-id)))
                    (hash-set '#:mentioned-tag-ids '())
-                   send-message))
+                   (send-message #:bot-id bot-id #:bot-token bot-token
+                                 #:braid-url braid-url)))
               (run-tasks))))
           (-> (list "Okay, I'll remind you in" (number->string secs) "seconds")
               string-join))
@@ -44,4 +47,6 @@
                   "Try something like "
                   "`/reminderbot check laundry in 5 minutes`.")
             (string-join "\n")))
-      (reply-to msg)))
+      (reply-to msg
+                #:bot-id bot-id #:bot-token bot-token
+                #:braid-url braid-url)))

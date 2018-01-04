@@ -1,6 +1,8 @@
 #lang racket/base
 
-(require "server.rkt")
+(require braidbot/server
+         "config.rkt"
+         "behaviour.rkt")
 
 (module+ test
   (require rackunit))
@@ -35,5 +37,4 @@
 (module+ main
   ;; Main entry point, executed when run with the `racket` executable or DrRacket.
   ;; TODO: get port from config file
-  (serve 8899)
-  )
+  (serve bot-token act-on-message 8899))
