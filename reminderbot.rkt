@@ -1,6 +1,4 @@
-#lang racket/base
-
-(provide act-on-message)
+#lang braidbot/insta
 
 (require racket/match
          racket/string
@@ -8,11 +6,13 @@
 
          braidbot/util
          braidbot/uuid
-         braidbot/braid
+         braidbot/braid)
 
-         "config.rkt")
+(define bot-id "5a47c63e-8d23-4bba-92ef-53c3c0f7e398")
+(define bot-token "4S3EzYM-exfyBibpYxEggiX7ahcWrRh3AIKoKbms")
+(define braid-url "http://localhost:5557")
 
-(define reminder-re #rx"^/reminderbot (.*) in ([0-9]+) minutes$")
+(define reminder-re #rx"^/reminderbot (.*) in ([0-9]+) minutes?$")
 
 (define (parse-reminder str)
   (if-let [matches (regexp-match reminder-re str)]
