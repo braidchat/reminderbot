@@ -15,6 +15,8 @@
 
 (define reminder-re #rx"^/reminderbot (.*) in ([0-9]+) minutes?$")
 
+(on-init (λ () (println "Launching reminderbot")))
+
 (define (parse-reminder str)
   (if-let [matches (regexp-match reminder-re str)]
     (let ([secs (-> matches caddr string->number (* 60))]
