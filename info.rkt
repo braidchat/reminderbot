@@ -1,7 +1,7 @@
 #lang info
 (define collection "reminderbot")
 (define deps '("base"
-               "braidbot"
+               "https://github.com/braidchat/braidbot.git#v1.0"
                "tasks"))
 (define build-deps '("web-server-lib"))
 (define pkg-desc "Description Here")
